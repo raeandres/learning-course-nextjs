@@ -3,11 +3,12 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { LatestInvoice } from '@/app/lib/definitions';
-export default async function LatestInvoices({
-  latestInvoices,
-}: {
-  latestInvoices: LatestInvoice[];
-}) {
+import { fetchLatestInvoices } from '@/app/lib/data';
+export default async function LatestInvoices() {
+   const latestInvoices = await fetchLatestInvoices();
+     // delay test to show loading
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // can remove this loading for testing only
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
